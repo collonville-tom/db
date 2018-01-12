@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            file:///opt/equinox-loader/bundles/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/osgi
+             file:///opt/equinox-loader/bundles/spring-osgi.xsd">
+
+
+	
+			 
+    <bean id="internalDBTestBean" class="org.tc.osgi.bundle.internal.db.connector.test.bean.InternalDBConnectorTestBean" init-method="testTinyDB" >
+	    <property name="utilsService" ref="utilsServiceRef"/>
+	    <property name="internalDBConnectorService" ref="internalDBConnectorServiceRef"/>
+    </bean>
+
+	<osgi:reference id="utilsServiceRef" interface="org.tc.osgi.bundle.utils.interf.module.service.ILoggerUtilsService"/>
+    <osgi:reference id="internalDBConnectorServiceRef" interface="org.tc.osgi.bundle.internal.db.connector.interf.module.service.IInternalDBConnectorService"/>
+
+</beans>

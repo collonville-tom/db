@@ -1,0 +1,156 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.tc.osgi.test</groupId>
+	<artifactId>tc-osgi-bundle-internal-database-connector-test</artifactId>
+	<name>${project.artifactId}-${project.version}</name>
+	<packaging>bundle</packaging>
+	<version>${build}${snapshot}</version>
+	<description>Composant de test</description>
+
+	
+	<properties>
+		<build>0.1.0</build>
+        <internal.database.interfaces.version>0.1.0</internal.database.interfaces.version>
+        <internal.database.version>0.2.0</internal.database.version> 
+		<utils.interfaces.version>0.1.0</utils.interfaces.version>
+		<utils.version>0.3.0</utils.version>
+		<spring.version>0.2.0</spring.version>
+		<equinox-loader.version>0.2.0</equinox-loader.version>
+		<snapshot>-SNAPSHOT</snapshot>
+	</properties>
+	
+    <dependencies>
+		<dependency>
+			<groupId>org.tc.osgi.bundle</groupId>
+			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
+			<type>bundle</type>
+			<classifier>assembly</classifier>
+			<version>${utils.interfaces.version}${snapshot}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.tc.osgi.bundle</groupId>
+			<artifactId>tc-osgi-bundle-internal-database-connector-interfaces</artifactId>
+			<type>bundle</type>
+			<classifier>assembly</classifier>
+			<version>${internal.database.interfaces.version}${snapshot}</version>
+		</dependency>
+	</dependencies>
+
+
+    <parent>
+        <groupId>org.tc</groupId>
+        <artifactId>tc-osgi-internal-database</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>./</classpathPrefix>
+						</manifest>
+						<manifestEntries>
+							<Class-Path>./ ./${project.artifactId}-${project.version}/</Class-Path>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.3.7</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Bundle-Version>${project.version}</Bundle-Version>
+						<Bundle-Vendor>TC</Bundle-Vendor>
+						<Export-Package>org.tc.osgi.bundle.*</Export-Package>
+					</instructions>
+				</configuration>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<!-- Packaging debian -->
+					<execution>
+						<id>assembly-debian</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptors>
+								<descriptor>src/main/assembly/assembly-debian.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+					<execution>
+						<id>assembly-targz</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptors>
+								<descriptor>src/main/assembly/assembly-targz.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<!-- Donne les droit et création du .deb -->
+				<!-- Finir le package debian pour le composant utils -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>packaging-debian</id>
+						<phase>package</phase>
+						<configuration>
+							<tasks>
+								<exec dir="." executable="bash" osfamily="unix">
+									<arg
+										line='-c "chmod 755 ${project.build.directory}/${project.artifactId}-${project.version}/DEBIAN/*"' />
+								</exec>
+								<!-- ***************************************************************************** -->
+								<!-- !! On crée les .DEB !! -->
+								<exec dir="." executable="bash" osfamily="unix">
+									<arg
+										line='-c "dpkg-deb --build ${project.build.directory}/${project.artifactId}-${project.version} ./target"' />
+								</exec>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	
+
+
+</project>

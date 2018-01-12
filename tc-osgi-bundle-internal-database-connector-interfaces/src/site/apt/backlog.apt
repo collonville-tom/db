@@ -1,0 +1,40 @@
+Backlog
+
+* attentes
+
+		* Mettre a jour documentation SRS
+		
+		* Mettre a jour documentation SDD
+		
+		* Mettre a jour documentation STP
+		
+		* Mettre a jour documentation index
+		
+		* 0.1.0 faire une relecture des docs
+        
+        * 0.1.0 http://soat.developpez.com/articles/oracle-berkeley-database-javaedition/ 
+
+        * 0.1.0 prevoir un mecanisme de requete de base
+
+        * 0.1.0 prevoir du coup un connecteur generique et un mode plug/neo4j/postgres-hybernate, etc
+        
+        * (https://neo4j.com/docs/java-reference/current/#tutorials-java-embedded) ,https://mvnrepository.com/artifact/org.apache.servicemix.bundles/org.apache.servicemix.bundles.neo4j/1.9.2_1,   https://mvnrepository.com/artifact/org.apache.servicemix.bundles/org.apache.servicemix.bundles.spring-data-neo4j 
+  
+		* prevoir un mecanisme permettant de switcher de la BD neo4j interne
+		
+		* https://web.stanford.edu/class/cs276a/projects/docs/berkeleydb/reftoc.html
+		
+		* http://docs.oracle.com/cd/E17277_02/html/index.html
+		
+		* gere les format lors du stokage "keyValue".getBytes("UTF-8"))
+		
+		* pour les bd clef valeur, n'utiliser que des String? 
+		
+		* decoupler les services
+		
+* acceptes
+
+* refuses
+
+* historique
+

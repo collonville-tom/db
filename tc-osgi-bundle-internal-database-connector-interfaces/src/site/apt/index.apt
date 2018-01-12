@@ -1,0 +1,8 @@
+Introduction 
+
+  Interface de gestion d'un composant structurant une bd pour equinox loader 
+  
+  	basé sur berkeley DataBase 
+  	
+  	mais profitant aussi d'autre base possible
+  

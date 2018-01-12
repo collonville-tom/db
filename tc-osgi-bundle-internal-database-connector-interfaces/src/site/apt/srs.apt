@@ -1,0 +1,16 @@
+Internal database connector Software Requirements Specification
+
+* General
+
+** Object
+
+*** @req SRS_TC_OSGI_INTERNAL_DB_010
+
+  Le composant fourni le moyen de stoker des données dans une base de donée interne a l'executif 
+
+        * @version 0.1.0
+
+        * @specify SDD_TC_OSGI_PARENT_INTERNAL_DB_040
+
+        * @T
+

@@ -1,0 +1,22 @@
+Internal database connector test Software Design Description
+
+* General
+
+** Object
+
+*** @req SDD_TC_OSGI_INTERNAL_DB_010
+
+  Le composant implemente un modele simple de donées comme cas d'etude 
+
+        * @version 0.1.0
+
+        * @satisfy SRS_TC_OSGI_INTERNAL_DB_TEST_010
+        
+*** @req SDD_TC_OSGI_INTERNAL_DB_020
+
+  Le composant est un bundle osgi et utilise spring pour simplifier la gestion des service osgi 
+
+        * @version 0.1.0
+
+        * @depend SRS_TC_OSGI_PARENT_SPRING_030
+

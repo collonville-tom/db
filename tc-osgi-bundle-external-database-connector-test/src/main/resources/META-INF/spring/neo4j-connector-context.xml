@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            file:///opt/equinox-loader/bundles/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/osgi
+             file:///opt/equinox-loader/bundles/spring-osgi.xsd">
+
+	
+			 
+    <bean id="externalDBTestBean" class="org.tc.osgi.bundle.external.db.connector.neo4j.test.bean.Neo4jConnectorTestBean" init-method="testTinyDB" >
+	    <property name="utilsService" ref="utilsServiceRef"/>
+	    <property name="neo4jConnectorService" ref="neo4jConnectorServiceRef"/>
+    </bean>
+
+    <osgi:reference id="utilsServiceRef" interface="org.tc.osgi.bundle.utils.module.service.IUtilsService"/>
+    <osgi:reference id="neo4jConnectorServiceRef" interface="org.tc.osgi.bundle.external.db.connector.module.service.INeo4jConnectorService"/>
+
+</beans>

@@ -1,0 +1,12 @@
+Package: ${project.artifactId}-${build}
+Version: ${versiontimestamp}
+Section: base
+Priority: optional
+Architecture: all
+Depends: tc-osgi-bundle-utils-interfaces-${utils.version},
+tc-osgi-bundle-external-database-connector-interfaces${external.database.interfaces.version}
+Maintainer: Collonville Thomas <collonville_tom@yahoo.fr>
+Homepage: <http://collonville.thomas.free.fr>
+Description: Bundle outils generique osgi pour l'ajout de focntionnalité spring
+
+

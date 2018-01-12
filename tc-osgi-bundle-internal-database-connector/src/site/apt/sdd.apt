@@ -1,0 +1,13 @@
+Internal database connector  Software Design Description
+
+* General
+
+** Object
+
+*** @req SDD_TC_OSGI_INTERNAL_DB_010
+
+  Le composant se base sur la base de données nosql berkeley pour structurer les données a sauvegarder 
+
+        * @version 0.1.0
+
+        * @satisfy SRS_TC_OSGI_INTERNAL_DB_010

@@ -1,0 +1,18 @@
+Internal database connector test Software Requirements Specification
+
+* General
+
+** Object
+
+*** @req SRS_TC_OSGI_INTERNAL_DB_TEST_010
+
+  Le composant fourni un cas d'utilisation du projet tc-osgi-bundle-internal-database-connector 
+
+        * @version 0.1.0
+
+        * @specify STP_TC_OSGI_INTERNAL_DB_010, STP_TC_OSGI_PARENT_INTERNAL_DB_TEST_010
+
+		* @depend SRS_TC_OSGI_PARENT_INTERNAL_DB_040        
+
+        * @D
+
