@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.tc.osgi.test</groupId>
+	<groupId>org.tc.osgi.test.database</groupId>
 	<artifactId>tc-osgi-bundle-external-database-connector-test</artifactId>
 	<name>${project.artifactId}-${project.version}</name>
 	<packaging>bundle</packaging>
@@ -22,18 +22,16 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.tc.osgi.bundle</groupId>
+			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
-			<type>bundle</type>
 			<classifier>assembly</classifier>
 			<version>${utils.interfaces.version}${snapshot}</version>
 			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>org.tc.osgi.bundle</groupId>
+			<groupId>org.tc.osgi.bundle.database</groupId>
 			<artifactId>tc-osgi-bundle-external-database-connector-interfaces</artifactId>
-			<type>bundle</type>
 			<classifier>assembly</classifier>
 			<version>${external.database.interfaces.version}${snapshot}</version>
 			<scope>compile</scope>
@@ -42,11 +40,11 @@
 
 
 
-	<parent>
-		<groupId>org.tc</groupId>
-		<artifactId>tc-osgi-external-database</artifactId>
-		<version>0.1.0-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>org.tc.parent</groupId>
+        <artifactId>tc-osgi-parent</artifactId>
+        <version>0.7.0-SNAPSHOT</version>
+    </parent>
 
 	<build>
 		<plugins>
@@ -122,31 +120,30 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<!-- Donne les droit et création du .deb -->
-				<!-- Finir le package debian pour le composant utils -->
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
+				<artifactId>jdeb</artifactId>
+				<groupId>org.vafer</groupId>
+				<version>1.5</version>
 				<executions>
 					<execution>
-						<id>packaging-debian</id>
 						<phase>package</phase>
-						<configuration>
-							<tasks>
-								<exec dir="." executable="bash" osfamily="unix">
-									<arg
-										line='-c "chmod 755 ${project.build.directory}/${project.artifactId}-${project.version}/DEBIAN/*"' />
-								</exec>
-								<!-- ***************************************************************************** -->
-								<!-- !! On crée les .DEB !! -->
-								<exec dir="." executable="bash" osfamily="unix">
-									<arg
-										line='-c "dpkg-deb --build ${project.build.directory}/${project.artifactId}-${project.version} ./target"' />
-								</exec>
-							</tasks>
-						</configuration>
 						<goals>
-							<goal>run</goal>
+							<goal>jdeb</goal>
 						</goals>
+						<configuration>
+							<deb>${project.build.directory}/${project.artifactId}-${build}_${versiontimestamp}_all.deb</deb>
+							<verbose>true</verbose>
+							<controlDir>${project.build.directory}/${project.artifactId}-${project.version}/DEBIAN</controlDir>
+							<dataSet>
+								<data>
+									<src>${project.build.directory}/${project.artifactId}-${project.version}/opt</src>
+									<type>directory</type>
+									<mapper>
+										<type>perm</type>
+										<prefix>/opt</prefix>
+									</mapper>
+								</data>
+							</dataSet>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

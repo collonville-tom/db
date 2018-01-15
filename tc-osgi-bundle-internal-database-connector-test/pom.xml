@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.tc.osgi.test</groupId>
+	<groupId>org.tc.osgi.bundle.test</groupId>
 	<artifactId>tc-osgi-bundle-internal-database-connector-test</artifactId>
 	<name>${project.artifactId}-${project.version}</name>
 	<packaging>bundle</packaging>
@@ -22,14 +22,14 @@
 	
     <dependencies>
 		<dependency>
-			<groupId>org.tc.osgi.bundle</groupId>
+			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
 			<type>bundle</type>
 			<classifier>assembly</classifier>
 			<version>${utils.interfaces.version}${snapshot}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.tc.osgi.bundle</groupId>
+			<groupId>org.tc.osgi.bundle.database</groupId>
 			<artifactId>tc-osgi-bundle-internal-database-connector-interfaces</artifactId>
 			<type>bundle</type>
 			<classifier>assembly</classifier>
@@ -39,9 +39,9 @@
 
 
     <parent>
-        <groupId>org.tc</groupId>
-        <artifactId>tc-osgi-internal-database</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <groupId>org.tc.parent</groupId>
+        <artifactId>tc-osgi-parent</artifactId>
+        <version>0.7.0-SNAPSHOT</version>
     </parent>
 
 	<build>

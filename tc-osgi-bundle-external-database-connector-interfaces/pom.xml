@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>tc-osgi-bundle-external-database-connector-interfaces</artifactId>
 	<name>${project.artifactId}-${project.version}</name>
-	<groupId>org.tc.osgi.bundle</groupId>
+	<groupId>org.tc.osgi.bundle.database</groupId>
 	<packaging>bundle</packaging>
 	<version>${build}${snapshot}</version>
 	<description>Gestionaire de BD pour equinox loader</description>
@@ -16,9 +16,8 @@
 	
 	<dependencies>
 		<dependency>
-			<groupId>org.tc.osgi.bundle</groupId>
+			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
-			<type>bundle</type>
 			<classifier>assembly</classifier>
 			<version>${utils.interfaces.version}${snapshot}</version>
 			<scope>compile</scope>
@@ -32,9 +31,9 @@
 	</dependencies>
 
     <parent>
-        <groupId>org.tc</groupId>
-        <artifactId>tc-osgi-external-database</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <groupId>org.tc.parent</groupId>
+        <artifactId>tc-osgi-parent</artifactId>
+        <version>0.7.0-SNAPSHOT</version>
     </parent>
 
 	<build>
@@ -111,32 +110,30 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<!-- Donne les droit et création du .deb -->
-				<!-- Finir le package debian pour le composant utils -->
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
+				<artifactId>jdeb</artifactId>
+				<groupId>org.vafer</groupId>
+				<version>1.5</version>
 				<executions>
 					<execution>
-						<id>packaging-debian</id>
 						<phase>package</phase>
-						<configuration>
-							<tasks>
-								<exec dir="." executable="bash" osfamily="unix">
-									<arg
-										line='-c "chmod 755 ${project.build.directory}/${project.artifactId}-${project.version}/DEBIAN/*"' />
-								</exec>
-								<!-- ***************************************************************************** -->
-								<!-- !! On crée les .DEB !! -->
-								<exec dir="." executable="bash" osfamily="unix">
-									<arg
-										line='-c "dpkg-deb --build ${project.build.directory}/${project.artifactId}-${project.version} ./target"' />
-								</exec>
-
-							</tasks>
-						</configuration>
 						<goals>
-							<goal>run</goal>
+							<goal>jdeb</goal>
 						</goals>
+						<configuration>
+							<deb>${project.build.directory}/${project.artifactId}-${build}_${versiontimestamp}_all.deb</deb>
+							<verbose>true</verbose>
+							<controlDir>${project.build.directory}/${project.artifactId}-${project.version}/DEBIAN</controlDir>
+							<dataSet>
+								<data>
+									<src>${project.build.directory}/${project.artifactId}-${project.version}/opt</src>
+									<type>directory</type>
+									<mapper>
+										<type>perm</type>
+										<prefix>/opt</prefix>
+									</mapper>
+								</data>
+							</dataSet>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
