@@ -17,7 +17,7 @@
     <module>tc-osgi-bundle-internal-database-connector-interfaces</module>
     <module>tc-osgi-bundle-internal-database-connector</module>
     <module>tc-osgi-bundle-internal-database-connector-test</module>
-	  <module>tc-osgi-bundle-external-database-connector-interfaces</module>
+	 <module>tc-osgi-bundle-external-database-connector-interfaces</module>
   	<module>tc-osgi-bundle-external-database-connector</module>
   	<module>tc-osgi-bundle-external-database-connector-test</module>
   </modules>
