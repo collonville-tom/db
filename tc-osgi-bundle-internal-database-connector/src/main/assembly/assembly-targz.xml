@@ -29,6 +29,7 @@
 			<useDefaultExcludes>true</useDefaultExcludes>
 			<filtered>true</filtered>
 			<includes>
+				<include>*.yaml</include>
 				<include>*.xml</include>
 			</includes>
 		</fileSet>

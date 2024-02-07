@@ -82,4 +82,10 @@ public final class InternalDBConnectorPropertyFile extends AbstractPropertyFile 
 		return cachePercent;
 	}
 
+	@Override
+	public String getYamlFile() {
+		// TODO Auto-generated method stub
+		return InternalDBConnectorPropertyFile.getInstance().getConfigDirectory() + getConfFile();
+	}
+
 }

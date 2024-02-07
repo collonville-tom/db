@@ -13,7 +13,7 @@ import org.tc.osgi.bundle.external.db.connector.module.service.LoggerServiceProx
 import org.tc.osgi.bundle.external.db.connector.module.service.PropertyServiceProxy;
 import org.tc.osgi.bundle.external.db.connector.module.service.UtilsServiceProxy;
 import org.tc.osgi.bundle.external.db.connector.module.service.impl.Neo4jConnectorServiceImpl;
-import org.tc.osgi.bundle.utils.interf.module.exception.TcOsgiException;
+import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.interf.module.service.ILoggerUtilsService;
 import org.tc.osgi.bundle.utils.interf.module.service.IPropertyUtilsService;
 import org.tc.osgi.bundle.utils.interf.module.service.IUtilsService;
@@ -22,6 +22,7 @@ import org.tc.osgi.bundle.utils.interf.module.utils.TcOsgiProxy;
 
 /**
  * Activator.java.
+ * 
  * @author Collonville Thomas
  * @version 0.0.1
  */
@@ -39,12 +40,10 @@ public class ExternalDBConnectorActivator extends AbstractTcOsgiActivator {
 		LoggerServiceProxy.getInstance().getLogger(ExternalDBConnectorActivator.class).debug("DB is connect");
 		session.run("CREATE (a:Person {name: {name}, title: {title}})", Values.parameters("name", "Arthur", "title", "King"));
 
-		final StatementResult result = session.run("MATCH (a:Person) WHERE a.name = {name} " + "RETURN a.name AS name, a.title AS title", Values.parameters(
-			"name", "Arthur"));
+		final StatementResult result = session.run("MATCH (a:Person) WHERE a.name = {name} " + "RETURN a.name AS name, a.title AS title", Values.parameters("name", "Arthur"));
 		while (result.hasNext()) {
 			final Record record = result.next();
-			LoggerServiceProxy.getInstance().getLogger(ExternalDBConnectorActivator.class).debug(
-				record.get("title").asString() + " " + record.get("name").asString());
+			LoggerServiceProxy.getInstance().getLogger(ExternalDBConnectorActivator.class).debug(record.get("title").asString() + " " + record.get("name").asString());
 		}
 
 		session.close();

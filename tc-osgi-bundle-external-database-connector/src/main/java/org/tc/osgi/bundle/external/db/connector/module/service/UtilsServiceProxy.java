@@ -23,6 +23,7 @@ public class UtilsServiceProxy implements IUtilsService {
 
 	/**
 	 * getInstance.
+	 * 
 	 * @return UtilsServiceProxy
 	 */
 	public static UtilsServiceProxy getInstance() {
@@ -46,6 +47,7 @@ public class UtilsServiceProxy implements IUtilsService {
 
 	/**
 	 * getService.
+	 * 
 	 * @return IUtilsService
 	 */
 	public IUtilsService getService() {
@@ -54,6 +56,7 @@ public class UtilsServiceProxy implements IUtilsService {
 
 	/**
 	 * setService.
+	 * 
 	 * @param service IUtilsService
 	 */
 	public void setService(final IUtilsService service) {
@@ -77,8 +80,7 @@ public class UtilsServiceProxy implements IUtilsService {
 	/**
 	 * list2String.
 	 *
-	 * @param chaines
-	 *            List<String>
+	 * @param chaines List<String>
 	 * @return String
 	 */
 	public String list2String(final List chaines, final String delimiter) {
@@ -87,7 +89,8 @@ public class UtilsServiceProxy implements IUtilsService {
 
 	/**
 	 * list2String.
-	 * @param tab T[]
+	 * 
+	 * @param tab       T[]
 	 * @param delimiter String
 	 * @return <T>
 	 */

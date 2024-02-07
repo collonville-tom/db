@@ -6,6 +6,7 @@ import org.tc.osgi.bundle.utils.interf.module.service.ILoggerUtilsService;
 
 /**
  * UtilsServiceProxy.java.
+ * 
  * @author collonville thomas
  * @version
  * @track
@@ -19,6 +20,7 @@ public class LoggerServiceProxy implements ILoggerUtilsService {
 
 	/**
 	 * getInstance.
+	 * 
 	 * @return UtilsServiceProxy
 	 */
 	public static LoggerServiceProxy getInstance() {
@@ -57,6 +59,7 @@ public class LoggerServiceProxy implements ILoggerUtilsService {
 
 	/**
 	 * getService.
+	 * 
 	 * @return IUtilsService
 	 */
 	public ILoggerUtilsService getService() {
@@ -65,6 +68,7 @@ public class LoggerServiceProxy implements ILoggerUtilsService {
 
 	/**
 	 * setService.
+	 * 
 	 * @param service IUtilsService
 	 */
 	public void setService(final ILoggerUtilsService service) {

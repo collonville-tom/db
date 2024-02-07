@@ -10,13 +10,13 @@
 
 	
 	<properties>
-		<build>0.1.0</build>
-        <external.database.version>0.1.0</external.database.version>
-        <external.database.interfaces.version>0.1.0</external.database.interfaces.version> 
-		<utils.version>0.3.0</utils.version>
-		<utils.interfaces.version>0.1.0</utils.interfaces.version>
-		<spring.version>0.2.0</spring.version>
-		<equinox-loader.version>0.2.0</equinox-loader.version>
+		<build>0.11.0</build>
+        <external.database.version>0.11.0</external.database.version>
+        <external.database.interfaces.version>0.11.0</external.database.interfaces.version> 
+		<utils.version>0.11.0</utils.version>
+		<utils.interfaces.version>0.11.0</utils.interfaces.version>
+		<spring.version>0.11.0</spring.version>
+		<equinox-loader.version>0.11.0</equinox-loader.version>
 		<snapshot>-SNAPSHOT</snapshot>
 	</properties>
 
@@ -43,7 +43,7 @@
     <parent>
         <groupId>org.tc.parent</groupId>
         <artifactId>tc-osgi-parent</artifactId>
-        <version>0.7.0</version>
+        <version>0.11.0-SNAPSHOT</version>
     </parent>
 
 	<build>
@@ -54,98 +54,24 @@
 				<configuration>
 					<archive>
 						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>./</classpathPrefix>
-						</manifest>
-						<manifestEntries>
-							<Class-Path>./ ./${project.artifactId}-${project.version}/</Class-Path>
-						</manifestEntries>
 					</archive>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
-				<version>2.3.7</version>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Bundle-Name>${project.name}</Bundle-Name>
-						<Bundle-Version>${project.version}</Bundle-Version>
-						<Bundle-Vendor>TC</Bundle-Vendor>
-					</instructions>
-				</configuration>
-				<executions>
-					<execution>
-						<id>bundle-manifest</id>
-						<phase>process-classes</phase>
-						<goals>
-							<goal>manifest</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<executions>
-					<!-- Packaging debian -->
-					<execution>
-						<id>assembly-debian</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<configuration>
-							<appendAssemblyId>false</appendAssemblyId>
-							<descriptors>
-								<descriptor>src/main/assembly/assembly-debian.xml</descriptor>
-							</descriptors>
-						</configuration>
-					</execution>
-					<execution>
-						<id>assembly-targz</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<configuration>
-							<appendAssemblyId>false</appendAssemblyId>
-							<descriptors>
-								<descriptor>src/main/assembly/assembly-targz.xml</descriptor>
-							</descriptors>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<artifactId>jdeb</artifactId>
 				<groupId>org.vafer</groupId>
-				<version>1.5</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>jdeb</goal>
-						</goals>
-						<configuration>
-							<deb>${project.build.directory}/${project.artifactId}-${build}_${versiontimestamp}_all.deb</deb>
-							<verbose>true</verbose>
-							<controlDir>${project.build.directory}/${project.artifactId}-${project.version}/DEBIAN</controlDir>
-							<dataSet>
-								<data>
-									<src>${project.build.directory}/${project.artifactId}-${project.version}/opt</src>
-									<type>directory</type>
-									<mapper>
-										<type>perm</type>
-										<prefix>/opt</prefix>
-									</mapper>
-								</data>
-							</dataSet>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
